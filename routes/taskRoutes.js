@@ -69,3 +69,17 @@ router.delete("/:id", async (req, res) => {
 });
 
 module.exports = router;
+
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+
+    res.json(updatedTask);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
